@@ -1,8 +1,12 @@
 import 'package:afn_hydro_link/Pages/home_page.dart';
+import 'package:afn_hydro_link/Utilities/data_model.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider(create: (context) => DataModel(), child: const MyApp(),)
+  );
 }
 
 class MyApp extends StatelessWidget {
