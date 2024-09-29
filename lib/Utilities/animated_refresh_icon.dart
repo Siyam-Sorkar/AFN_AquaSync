@@ -1,4 +1,6 @@
+import 'package:afn_hydro_link/Utilities/data_model.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class AnimatedRefreshIcon extends StatefulWidget {
   @override
@@ -15,7 +17,7 @@ class _AnimatedRefreshIconState extends State<AnimatedRefreshIcon>
 
     // Initialize the animation controller
     _controller = AnimationController(
-      duration: const Duration(seconds: 1), // Rotation duration
+      duration: const Duration(milliseconds: 500), // Rotation duration
       vsync: this,
     );
   }
@@ -31,11 +33,13 @@ class _AnimatedRefreshIconState extends State<AnimatedRefreshIcon>
       return; // Prevent multiple triggers
     }
     _controller.forward(from: 0.0); // Start animation from the beginning
+
+    //Get the class
   }
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedBuilder(
+    return Consumer(builder: (context, value, child) => AnimatedBuilder(
       animation: _controller,
       builder: (context, child) {
         return Transform.rotate(
@@ -44,11 +48,18 @@ class _AnimatedRefreshIconState extends State<AnimatedRefreshIcon>
             icon: Transform.flip(flipX: true, child: Transform.rotate(angle: 180, child: Icon(Icons.refresh))),
             onPressed: () {
               _rotateIcon(); // Trigger rotation on button click
+
+              //Get access to the class
+              final incrementer = context.read<DataModel>();
+
+              //CALL The methode
+              incrementer.increment();
             },
             iconSize: 50.0,
-          ),
-        );
-      },
+            ),
+          );
+        },
+      )
     );
   }
 }

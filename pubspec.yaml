@@ -28,7 +28,10 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  firebase_core:
+  font_awesome_flutter:
   provider:
+  hidden_drawer_menu:
   flutter:
     sdk: flutter
 

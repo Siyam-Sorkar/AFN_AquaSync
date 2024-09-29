@@ -1,8 +1,13 @@
 import 'package:afn_hydro_link/Utilities/animated_refresh_icon.dart';
+import 'package:afn_hydro_link/Utilities/side_drawer.dart';
+import 'package:afn_hydro_link/Utilities/water_pipe.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:hidden_drawer_menu/hidden_drawer_menu.dart';
 import 'package:provider/provider.dart';
+// import '';
 
 import '../Utilities/data_model.dart';
 
@@ -17,10 +22,9 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Consumer<DataModel>(
         builder: (context, value, child) => Scaffold(
+          drawer: SideDrawer(),
           appBar: AppBar(
-            // backgroundColor: Colors.green[50],
-            elevation: 0,
-            leading: IconButton(icon: Icon(Icons.menu), color: Colors.black, onPressed: () {  },),
+            leading: IconButton(icon:  FaIcon(FontAwesomeIcons.alignLeft), onPressed: (){SimpleHiddenDrawerController.of(context).toggle();},),
           ),
           body: SingleChildScrollView(
             child: Padding(
@@ -28,8 +32,10 @@ class _HomePageState extends State<HomePage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+
                   // Soil moisture level card
                   Card(
+                    elevation: 20,
                     shape: RoundedRectangleBorder(
                       side: BorderSide(color: Colors.black),
                       borderRadius: BorderRadius.circular(16),
@@ -54,18 +60,6 @@ class _HomePageState extends State<HomePage> {
                                   SizedBox(height: 20),
                                 ],
                               ),
-                              // Transform.flip(flipX: true, child: Transform.rotate(angle: 180,
-                              //     child: IconButton(onPressed: (){
-                              //
-                              //       setState(() {
-                              //         if (value.moistureLevel/100 < 1) {
-                              //           value.moistureLevel/100 += 0.1;
-                              //         }
-                              //         else{
-                              //           value.moistureLevel/100 -= 0.2;
-                              //         }
-                              //       });},
-                              //     icon: Icon(Icons.refresh_sharp, size: 50,)))),
 
                               AnimatedRefreshIcon(),
                             ],
@@ -86,7 +80,7 @@ class _HomePageState extends State<HomePage> {
                                       value: value.moistureLevel/100,
                                       strokeWidth: 25,
                                       backgroundColor: Colors.green[100],
-                                      valueColor: AlwaysStoppedAnimation<Color>(value.moistureLevel/100 <= 0.15 ? Colors.red : value.moistureLevel/100 <= 0.3 ? Colors.orange : Colors.green.shade900),
+                                      valueColor: AlwaysStoppedAnimation<Color>(value.moistureLevel/100 <= 0.2 ? Colors.red : value.moistureLevel/100 <= 0.5 ? Colors.orange : Colors.green.shade900),
                                     ),
                                   ),
                                   Text(
@@ -149,10 +143,14 @@ class _HomePageState extends State<HomePage> {
                       ),
                       Row(
                         children: [
-                          Text('Active', style: TextStyle(color: Colors.green)),
+                          Text(value.irrigatioinStatus ? 'Active' : 'Inactive', style: TextStyle(color:value.irrigatioinStatus ? Colors.green : Colors.red)),
                           Switch(
-                            value: true,
-                            onChanged: (value) {},
+                            // activeTrackColor: Colors.green,
+                            value: value.irrigatioinStatus,
+                            onChanged: (value) {
+                              final toggler = context.read<DataModel>();
+                              toggler.irrigationToggler(value);
+                            },
                             activeColor: Colors.green,
                           ),
                         ],
@@ -164,6 +162,7 @@ class _HomePageState extends State<HomePage> {
                   Row(
                     children: [
                       Container(width: 200, height: 5, color: Colors.black,),
+                      // Container( margin: EdgeInsets.all(2), height: 10, width: 200, child: WaterFlowLine()),
                       Image(height: 50, image: AssetImage('lib/Images/waterpump.png')),
                     ],
                   ),
@@ -198,7 +197,6 @@ class _HomePageState extends State<HomePage> {
     return Padding(
       padding: const EdgeInsets.only(right: 5.0),
       child: Card(
-          // margin: EdgeInsets.all(15),
           shape: RoundedRectangleBorder(
             side: BorderSide(color: Colors.black),
             borderRadius: BorderRadius.circular(16),
