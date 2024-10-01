@@ -1,7 +1,10 @@
+import 'package:afn_hydro_link/Pages/ground_monitor_page.dart';
 import 'package:afn_hydro_link/Pages/home_page.dart';
 import 'package:afn_hydro_link/Pages/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:hidden_drawer_menu/hidden_drawer_menu.dart';
+
+import 'Firebase/firebase_crud.dart';
 
 class SideDrawer extends StatefulWidget {
   const SideDrawer({super.key});
@@ -12,26 +15,38 @@ class SideDrawer extends StatefulWidget {
 
 class _SideDrawerState extends State<SideDrawer> {
   List<ScreenHiddenDrawer> _pages = [];
+  late FirebaseCRUD firebaseCRUD;
 
   @override
   void initState() {
     super.initState();
 
+    firebaseCRUD = FirebaseCRUD();
+    firebaseCRUD.activateListeners(context);
+
     _pages = [
       ScreenHiddenDrawer(
           ItemHiddenMenu(
             name: 'Home Page',
-            baseStyle: TextStyle(),
-            selectedStyle: TextStyle()),
-            HomePage()
+            baseStyle:const TextStyle(),
+            selectedStyle:const TextStyle()),
+            const HomePage()
       ),
 
       ScreenHiddenDrawer(
           ItemHiddenMenu(
               name: 'Profile Page',
-              baseStyle: TextStyle(),
-              selectedStyle: TextStyle()),
-          ProfilePage()
+              baseStyle: const TextStyle(),
+              selectedStyle: const TextStyle()),
+          const ProfilePage()
+      ),
+
+      ScreenHiddenDrawer(
+          ItemHiddenMenu(
+              name: 'Ground Data Monitor',
+              baseStyle: const TextStyle(),
+              selectedStyle: const TextStyle()),
+          const GroundMonitorPage()
       ),
     ];
   }
@@ -44,7 +59,12 @@ class _SideDrawerState extends State<SideDrawer> {
       screens: _pages,
       backgroundColorMenu: Colors.greenAccent.shade100,
       initPositionSelected: 0,
-      // backgroundMenu: DecorationImage(image: AssetImage('lib/Images/waterpump.png')),
     );
+  }
+
+  @override
+  void deactivate() {
+    firebaseCRUD.deactivateListeners();
+    super.deactivate();
   }
 }

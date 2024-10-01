@@ -28,10 +28,6 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
-  firebase_core:
-  font_awesome_flutter:
-  provider:
-  hidden_drawer_menu:
   flutter:
     sdk: flutter
 
@@ -39,6 +35,15 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.6
+  shimmer: ^3.0.0
+  firebase_core:
+  firebase_database:
+  font_awesome_flutter:
+  provider:
+  hidden_drawer_menu:
+  parallax_rain:
+  intl:
+  get:
 
 dev_dependencies:
   flutter_test:
@@ -65,6 +70,8 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - lib/Images/waterpump.png
+    - lib/Images/Rice_Plant.png
+    - lib/Images/Logo.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
