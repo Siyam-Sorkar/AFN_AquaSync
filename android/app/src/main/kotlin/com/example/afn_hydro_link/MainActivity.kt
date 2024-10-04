@@ -1,4 +1,4 @@
-package com.example.afn_hydro_link
+package com.example.afn_aqua_sync
 
 import io.flutter.embedding.android.FlutterActivity
 

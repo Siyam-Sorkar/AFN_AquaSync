@@ -1,12 +1,9 @@
 import 'dart:ui' as ui;
-
 import 'package:flutter/material.dart';
 import 'package:flutter/physics.dart';
 
-import 'constants.dart';
-
 const thermoWidth = 96.0;
-const vPadding = 20.0;
+const vPadding = 5.0;
 const thickness = 8.0;
 const radius = thermoWidth / 2;
 
@@ -14,9 +11,11 @@ class Thermo extends StatefulWidget {
   const Thermo({
     super.key,
     required this.temperature,
+    required this.scaleHeight
   });
 
   final double temperature;
+  final int    scaleHeight;
 
   @override
   State<Thermo> createState() => _ThermoState();
@@ -66,7 +65,7 @@ class _ThermoState extends State<Thermo> with SingleTickerProviderStateMixin {
       animation: anim,
       builder: (context, _) {
         return CustomPaint(
-          painter: ThermoPainter(widget.temperature, animation: anim.value),
+          painter: ThermoPainter(widget.scaleHeight, widget.temperature, animation: anim.value),
         );
       },
     );
@@ -76,10 +75,11 @@ class _ThermoState extends State<Thermo> with SingleTickerProviderStateMixin {
 
 class ThermoPainter extends CustomPainter {
   final double temperature;
+  final int    scaleHeight;
 
   final double animation;
 
-  ThermoPainter(this.temperature, {required this.animation});
+  ThermoPainter(this.scaleHeight, this.temperature, {required this.animation});
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -104,7 +104,8 @@ class ThermoPainter extends CustomPainter {
 
     drawContainer(canvas, topLeft, bottomRight);
 
-    _drawRules(size, canvas, temperature / maxTemperature);
+    //Sde rules
+    _drawRules(size, canvas, temperature / scaleHeight);
 
     // mask
     _drawMask(canvas, size);
@@ -216,7 +217,7 @@ class ThermoPainter extends CustomPainter {
     final liquidTopLeft = Offset(
       (size.width - thermoWidth) / 2 + thickness,
       (size.height - radius - vPadding) -
-          ((temperature / 50) *
+          ((temperature / scaleHeight) *
               (size.height - (2 * vPadding + radius * 2))),
     ) -
         offset;
@@ -285,8 +286,8 @@ class ThermoPainter extends CustomPainter {
         Offset(348, y),
         Paint()
           ..color = y < (1 - ratio) * size.height
-              ? Colors.grey.shade300
-              : Colors.grey.shade400
+              ? Colors.grey.shade400
+              : Colors.grey.shade800
           ..style = PaintingStyle.stroke
           ..strokeWidth = 3,
       );

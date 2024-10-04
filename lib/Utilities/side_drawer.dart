@@ -1,9 +1,10 @@
-import 'package:afn_hydro_link/Pages/ground_monitor_page.dart';
-import 'package:afn_hydro_link/Pages/home_page.dart';
-import 'package:afn_hydro_link/Pages/profile_page.dart';
+import 'package:afn_aqua_sync/Pages/ground_monitor_page.dart';
+import 'package:afn_aqua_sync/Pages/home_page.dart';
+import 'package:afn_aqua_sync/Pages/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:hidden_drawer_menu/hidden_drawer_menu.dart';
 
+import '../Pages/weather_page.dart';
 import 'Firebase/firebase_crud.dart';
 
 class SideDrawer extends StatefulWidget {
@@ -47,6 +48,14 @@ class _SideDrawerState extends State<SideDrawer> {
               baseStyle: const TextStyle(),
               selectedStyle: const TextStyle()),
           const GroundMonitorPage()
+      ),
+
+      ScreenHiddenDrawer(
+          ItemHiddenMenu(
+              name: 'Weather Station',
+              baseStyle: const TextStyle(),
+              selectedStyle: const TextStyle()),
+          const WeatherPage(),
       ),
     ];
   }

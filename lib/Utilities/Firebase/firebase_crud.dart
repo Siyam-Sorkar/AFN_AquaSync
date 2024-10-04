@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../data_model.dart';  // Import your ChangeNotifier DataModel here
+import '../Data Models/data_model.dart';
 
 class FirebaseCRUD {
   final DatabaseReference _rtValueRef =
@@ -21,8 +21,8 @@ class FirebaseCRUD {
         // Updating the ChangeNotifier DataModel with new data
         context.read<DataModel>().updateGroundData(
           moisture: databaseData["Moisture_Level"] ?? 0,
-          temp: databaseData["Temperature"] ?? 0,
-          humid: databaseData["Humidity"] ?? 0,
+          temp: databaseData["Temperature"].toDouble() ?? 0.0,
+          humid: databaseData["Humidity"].toDouble() ?? 0.0,
         );
 
         // Update irrigation status

@@ -1,8 +1,9 @@
-import 'package:afn_hydro_link/Pages/ground_monitor_page.dart';
-import 'package:afn_hydro_link/Pages/home_page.dart';
-import 'package:afn_hydro_link/Pages/profile_page.dart';
-import 'package:afn_hydro_link/Utilities/data_model.dart';
-import 'package:afn_hydro_link/Utilities/side_drawer.dart';
+import 'package:afn_aqua_sync/Pages/ground_monitor_page.dart';
+import 'package:afn_aqua_sync/Pages/home_page.dart';
+import 'package:afn_aqua_sync/Pages/profile_page.dart';
+import 'package:afn_aqua_sync/Pages/weather_page.dart';
+import 'package:afn_aqua_sync/Utilities/Data%20Models/data_model.dart';
+import 'package:afn_aqua_sync/Utilities/side_drawer.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -30,11 +31,12 @@ class MyApp extends StatelessWidget {
       // home: GroundMonitorPage(),
       // home: SideDrawer(),
       routes: {
-        '/splash_screen'  : (context) => SplashScreen(),
-        '/home'           : (context) => HomePage(),
-        '/profile'        : (context) => ProfilePage(),
-        '/ground_monitor' : (context) => GroundMonitorPage(),
-        '/side_drawer'    : (context) => SideDrawer()
+        '/splash_screen'  : (context) => const SplashScreen(),
+        '/home'           : (context) => const HomePage(),
+        '/profile'        : (context) => const ProfilePage(),
+        '/ground_monitor' : (context) => const GroundMonitorPage(),
+        '/weather_station': (context) => const WeatherPage(),
+        '/side_drawer'    : (context) => const SideDrawer()
       },
       initialRoute: '/splash_screen',
     );

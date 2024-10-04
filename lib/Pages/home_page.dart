@@ -1,12 +1,12 @@
-import 'package:afn_hydro_link/Utilities/irrigation_animation.dart';
-import 'package:afn_hydro_link/Utilities/progress_indicator.dart';
-import 'package:afn_hydro_link/Utilities/side_drawer.dart';
+import 'package:afn_aqua_sync/Utilities/irrigation_animation.dart';
+import 'package:afn_aqua_sync/Utilities/progress_indicator.dart';
+import 'package:afn_aqua_sync/Utilities/side_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hidden_drawer_menu/hidden_drawer_menu.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
-import '../Utilities/data_model.dart';
+import '../Utilities/Data Models/data_model.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -28,6 +28,7 @@ class _HomePageState extends State<HomePage> {
 
     return Consumer<DataModel>(
         builder: (context, value, child) => Scaffold(
+          backgroundColor: Colors.green[100],
           drawer: const SideDrawer(),
           appBar: AppBar(
             leading: IconButton(icon:  const FaIcon(FontAwesomeIcons.alignLeft), onPressed: (){SimpleHiddenDrawerController.of(context).toggle();},),
@@ -35,7 +36,7 @@ class _HomePageState extends State<HomePage> {
           ),
           body: SingleChildScrollView(
             child: Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: const EdgeInsets.all(10.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -93,8 +94,8 @@ class _HomePageState extends State<HomePage> {
                                         Row(
                                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                           children: [
-                                            RoundDial(heightWidth: 80.0, data: value.temperature, symbol: "°", onTop: true, dialName: "Temperature",),
-                                            RoundDial(heightWidth: 80.0, data: value.humidity, symbol: "%", onTop: true, dialName: "Humidity",),
+                                            RoundDial(heightWidth: 80.0, data: value.temperature.toInt(), symbol: "°", onTop: true, dialName: "Temperature",),
+                                            RoundDial(heightWidth: 80.0, data: value.humidity.toInt(), symbol: "%", onTop: true, dialName: "Humidity",),
                                           ],
                                         ),
                                         // SizedBox(height: 10,),
@@ -109,6 +110,7 @@ class _HomePageState extends State<HomePage> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
+                                  const SizedBox(height: 100,),
                                   _buildIndicator('Optimal', Colors.green.shade900),
                                   const SizedBox(height: 10,),
                                   _buildIndicator('Warning', Colors.orange),
@@ -125,9 +127,18 @@ class _HomePageState extends State<HomePage> {
                   const SizedBox(height: 20),
 
                   // NASA Weather Predictions section
-                  const Text(
-                    'NASA Weather Predictions',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        'NASA Weather Predictions',
+                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      ),
+
+                      IconButton(onPressed: (){
+                        Navigator.pushNamed(context, "/weather_station");
+                      }, icon: const Icon(Icons.open_in_new_rounded, size: 30,))
+                    ],
                   ),
                   const SizedBox(height: 10),
 
@@ -136,13 +147,13 @@ class _HomePageState extends State<HomePage> {
                     child: ListView(
                       scrollDirection: Axis.horizontal,
                       children: [
-                        _buildWeatherCard('Today', 'Sunny', Icons.wb_sunny, Colors.orange),
-                        _buildWeatherCard('Monday', 'Light rain', Icons.grain, Colors.blue),
-                        _buildWeatherCard('Tuesday', 'Thunder', Icons.flash_on, Colors.purple),
+                        _buildWeatherCard('Today', 'Medium Rain', Icons.flash_on, Colors.blueAccent),
+                        _buildWeatherCard('Saturday', 'Light rain', Icons.grain, Colors.blue),
+                        _buildWeatherCard('Sunday', 'Sunny', Icons.wb_sunny, Colors.orange),
+                        _buildWeatherCard('Monday', 'Thunder', Icons.flash_on, Colors.purple),
+                        _buildWeatherCard('Tuesday', 'Light rain', Icons.grain, Colors.blue),
                         _buildWeatherCard('Wednesday', 'Medium Rain', Icons.flash_on, Colors.greenAccent),
                         _buildWeatherCard('Thursday', 'Heavy Rain', Icons.flash_on, Colors.blueAccent),
-                        _buildWeatherCard('Friday', 'Thunder', Icons.flash_on, Colors.purple),
-                        _buildWeatherCard('Saturday', 'Thunder', Icons.flash_on, Colors.purple),
                       ],
                     ),
                   ),

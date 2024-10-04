@@ -1,4 +1,4 @@
-import 'package:afn_hydro_link/Utilities/data_model.dart';
+import 'package:afn_aqua_sync/Utilities/Data%20Models/data_model.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hidden_drawer_menu/controllers/simple_hidden_drawer_controller.dart';
@@ -13,10 +13,15 @@ class GroundMonitorPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(icon:const FaIcon(FontAwesomeIcons.alignLeft), onPressed: (){SimpleHiddenDrawerController.of(context).toggle();},),
-        title:const Center(child: Text('Profile Page')),
+        // automaticallyImplyLeading: false,
+        elevation: 60,
+        leading: IconButton(icon:const FaIcon(FontAwesomeIcons.alignLeft), onPressed: (){
+          // Navigator.of(context).pop();
+          SimpleHiddenDrawerController.of(context).toggle();
+          },),
+        title:const Center(child: Text('Ground Monitor Page')),
       ),
-      backgroundColor: Colors.grey.shade100,
+      backgroundColor: Colors.green[100],
       body: const TemperatureView(),
     );
   }
@@ -31,9 +36,9 @@ class TemperatureView extends StatefulWidget {
 }
 
 class _TemperatureViewState extends State<TemperatureView> {
-  final ValueNotifier<double> temperature = ValueNotifier(0);
 
   String title = "Moisture Level";
+  double temp = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +63,7 @@ class _TemperatureViewState extends State<TemperatureView> {
                 //       fontWeight: FontWeight.w500, color: Colors.grey[700]),
                 //   textAlign: TextAlign.center,
                 // ),
-                const SizedBox(height: 3,),
+                // const SizedBox(height: 3,),
 
                 const Divider(height: 2,thickness: 3,),
 
@@ -66,8 +71,7 @@ class _TemperatureViewState extends State<TemperatureView> {
                   child: Text(
                     '${title == "Temperature" ? context.watch<DataModel>().temperature.toDouble() :
                     title == "Moisture Level" ? context.watch<DataModel>().moistureLevel.toDouble() :
-                    context.watch<DataModel>().humidity.toDouble()}${title == "Temperature" ? "°C" : "%"}',
-                    // '  ${temperature.value.toInt()}°',
+                    context.watch<DataModel>().humidity.toDouble()}${title == "Temperature" ? "°C"  : "%"}',
                     style: style?.copyWith(
                         fontWeight: FontWeight.w500, color: Colors.grey[600]),
                     textAlign: TextAlign.center,
@@ -81,11 +85,21 @@ class _TemperatureViewState extends State<TemperatureView> {
                         children: [
                           Positioned.fill(
                               child: Thermo(temperature:
-                              title == "Temperature" ? context.watch<DataModel>().temperature.toDouble() :
-                              title == "Moisture Level" ? 34: //context.watch<DataModel>().moistureLevel.toDouble() :
-                              context.watch<DataModel>().humidity.toDouble()
+                              title == "Temperature" ? context.watch<DataModel>().temperature :
+                              title == "Moisture Level" ? context.watch<DataModel>().moistureLevel.toDouble() :
+                              context.watch<DataModel>().humidity,scaleHeight: title == "Temperature" ? 50 : 100,
                               )
                           ),
+
+                          // Positioned.fill(
+                          //   right: 0,
+                          //   bottom: 0,
+                          //   child : ThermoSlider(value:
+                          //   title == "Temperature" ? context.watch<DataModel>().temperature.toDouble() :
+                          //   title == "Moisture Level" ? context.watch<DataModel>().moistureLevel.toDouble() :
+                          //   context.watch<DataModel>().humidity.toDouble(), onValueChanged: (value) => temp = value),
+                          // )
+
                         ],
                       ),
                     ),

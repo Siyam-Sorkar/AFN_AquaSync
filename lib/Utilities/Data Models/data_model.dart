@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 
 class DataModel extends ChangeNotifier{
-  bool _irrigationStatus   = false;
+  bool _irrigationStatus  = false;
   int _moistureLevel      = 0;
-  int _temperature        = 0;
-  int _humidity           = 0;
+  double _temperature     = 0;
+  double _humidity        = 0;
 
   int get moistureLevel      => _moistureLevel;
   bool get irrigatioinStatus => _irrigationStatus;
-  int get temperature     => _temperature;
-  int get humidity        => _humidity;
+  double get temperature     => _temperature;
+  double get humidity        => _humidity;
 
 
   void updateGroundData({
     required int moisture,
-    required int temp,
-    required int humid})
+    required double temp,
+    required double humid})
   {
     _moistureLevel = moisture;
     _temperature   = temp;

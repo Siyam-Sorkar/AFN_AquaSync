@@ -1,4 +1,4 @@
-name: afn_hydro_link
+name: afn_aqua_sync
 description: "A new Flutter project."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -43,7 +43,8 @@ dependencies:
   hidden_drawer_menu:
   parallax_rain:
   intl:
-  get:
+  http:
+
 
 dev_dependencies:
   flutter_test:
@@ -70,8 +71,10 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - lib/Images/waterpump.png
+    - lib/Images/myProfile.jpg
     - lib/Images/Rice_Plant.png
     - lib/Images/Logo.png
+    - lib/Images/cloudy.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

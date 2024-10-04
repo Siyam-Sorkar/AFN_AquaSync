@@ -1,10 +1,7 @@
 import 'dart:math';
-
-import 'package:afn_hydro_link/Utilities/Firebase/firebase_crud.dart';
-import 'package:afn_hydro_link/Utilities/data_model.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:afn_aqua_sync/Utilities/Firebase/firebase_crud.dart';
+import 'package:afn_aqua_sync/Utilities/Data%20Models/data_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:parallax_rain/parallax_rain.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
@@ -23,7 +20,7 @@ class IrrigationAnimation extends StatelessWidget {
           children: [
             Stack(
               children: [
-                Container(width: 280, height: 80, color: Colors.white60,
+                const SizedBox(width: 280, height: 80,
                 ),
                 context.read<DataModel>().irrigatioinStatus ?
                 Positioned(
@@ -41,20 +38,20 @@ class IrrigationAnimation extends StatelessWidget {
                   ),
                 ) : Container(),
 
-                Positioned(bottom: 0, left: 0, child: Image(height: 50, image: AssetImage('lib/Images/Rice_Plant.png'))),
-                Positioned(bottom: 0, left: 15, child: Image(height: 50, image: AssetImage('lib/Images/Rice_Plant.png'))),
-                Positioned(bottom: 0, left: 30,  child: Image(height: 50, image: AssetImage('lib/Images/Rice_Plant.png'))),
-                Positioned(bottom: 0, left: 45,  child: Image(height: 50, image: AssetImage('lib/Images/Rice_Plant.png'))),
-                Positioned(bottom: 0, left: 60,  child: Image(height: 50, image: AssetImage('lib/Images/Rice_Plant.png'))),
-                Positioned(bottom: 0, left: 75, child: Image(height: 50, image: AssetImage('lib/Images/Rice_Plant.png'))),
-                Positioned(bottom: 0, left: 90, child: Image(height: 50, image: AssetImage('lib/Images/Rice_Plant.png'))),
+                const Positioned(bottom: 0, left: 0, child: Image(height: 50, image: AssetImage('lib/Images/Rice_Plant.png'))),
+                const Positioned(bottom: 0, left: 15, child: Image(height: 50, image: AssetImage('lib/Images/Rice_Plant.png'))),
+                const Positioned(bottom: 0, left: 30,  child: Image(height: 50, image: AssetImage('lib/Images/Rice_Plant.png'))),
+                const Positioned(bottom: 0, left: 45,  child: Image(height: 50, image: AssetImage('lib/Images/Rice_Plant.png'))),
+                const Positioned(bottom: 0, left: 60,  child: Image(height: 50, image: AssetImage('lib/Images/Rice_Plant.png'))),
+                const Positioned(bottom: 0, left: 75, child: Image(height: 50, image: AssetImage('lib/Images/Rice_Plant.png'))),
+                const Positioned(bottom: 0, left: 90, child: Image(height: 50, image: AssetImage('lib/Images/Rice_Plant.png'))),
 
                 context.read<DataModel>().irrigatioinStatus ?
                 Positioned(
                   top: 19,
                   right: 75,
                   child: Shimmer.fromColors(
-                      period: Duration(milliseconds: 400),
+                      period: const Duration(milliseconds: 400),
                       baseColor: Colors.blue,
                       highlightColor: Colors.white,
                       enabled: true,
@@ -63,12 +60,12 @@ class IrrigationAnimation extends StatelessWidget {
                   ),
                 ) : Positioned(top: 19,right: 75, child: Container(width: pipeWidth, height: 5, color: Colors.grey[500],)),
                 // Container( margin: EdgeInsets.all(2), height: 10, width: 200, child: WaterFlowLine())
-                Positioned(right: 3,top: 0, child: Image(height: 50, image: AssetImage('lib/Images/waterpump.png'))),
+                const Positioned(right: 3,top: 0, child: Image(height: 50, image: AssetImage('lib/Images/waterpump.png'))),
                 Positioned(bottom: 0,right: 0, child: Container(width: 82, height: 29, color: Colors.black,)),
               ],
             ),
 
-            SizedBox(width: 10,),
+            const SizedBox(width: 10,),
 
             Transform.rotate(
               angle: pi/2,
@@ -90,7 +87,7 @@ class IrrigationAnimation extends StatelessWidget {
         ),
         Container(
           color: Colors.brown[700],
-          height: 5,
+          height: 7,
           width: double.infinity,
         ),
 
